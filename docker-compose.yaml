@@ -29,3 +29,19 @@ services:
       GF_LOG_LEVEL: debug
       GF_DATAPROXY_LOGGING: 1
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: uttne-jupyter-datasource
+  jupyter:
+    container_name: 'uttne-sampleplugin-datasource-jupyter'
+    image: jupyter/minimal-notebook:x86_64-python-3.11.6
+    command:
+      - start-notebook.sh
+      - --NotebookApp.token='' # 認証を無効化
+      - --NotebookApp.disable_check_xsrf=True # CSRFチェックを無効化
+    # environment:
+    #   - JUPYTER_TOKEN=    # トークン認証に使用するトークンを指定
+    #   - JUPYTER_PASSWORD= # パスワード認証に使用するパスワードを指定
+    #   - NB_UID=1000       # ユーザーIDを指定（デフォルト: 1000）
+    #   - NB_GID=100        # グループIDを指定（デフォルト: 100）
+    #   - CHOWN_HOME=yes    # ホームディレクトリの所有権を変更（デフォルト: yes）
+    #   - GRANT_SUDO=no     # sudo権限を付与（デフォルト: no）
+    ports:
+      - 18888:8888
